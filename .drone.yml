@@ -1,0 +1,30 @@
+---
+kind: pipeline
+type: docker
+name: test
+
+steps:
+- name: test
+  image: golang
+  commands:
+  - go test
+
+---
+kind: pipeline
+type: docker
+name: build
+
+steps:
+- name: code-test
+  image: plugins/docker
+  registry: registry.shitangdama.cn
+  repo: registry.shitangdama.cn/test/laki
+
+depends_on:
+- test
+
+trigger:
+  branch:
+  - master
+  event:
+  - push
