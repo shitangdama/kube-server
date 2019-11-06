@@ -9,6 +9,7 @@ steps:
   environment:
     CGO_ENABLED: 0
     GO111MODULE: on
+    GOPROXY: "https://goproxy.io"
   commands:
   - go test
 
