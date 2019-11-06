@@ -17,10 +17,20 @@ type: docker
 name: build
 
 steps:
-- name: code-test
+- name: build
   image: plugins/docker
   registry: registry.shitangdama.cn
   repo: registry.shitangdama.cn/test/laki
+  auto_tag: true
+    dockerfile: Dockerfile
+    username: shitangdama
+    password:
+      from_secret: docker_password
+    when:
+      branch:
+        - master
+      event:
+        - push
 
 depends_on:
 - test
