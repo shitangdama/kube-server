@@ -6,7 +6,7 @@ RUN export GOPROXY=https://goproxy.io
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o demo .
 
 FROM alpine:latest
 
