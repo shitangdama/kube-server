@@ -1,10 +1,10 @@
 ---
 kind: pipeline
-type: docker
+# type: docker
 name: default
 
-clone:
-  depth: 10
+# clone:
+#   depth: 10
 
 steps:
 - name: test
