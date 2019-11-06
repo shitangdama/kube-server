@@ -7,7 +7,7 @@ clone:
 
 steps:
 - name: code-test
-  image: golang:1.15
+  image: golang
   commands:
   - go build
   - go test
