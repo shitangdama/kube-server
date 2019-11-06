@@ -1,26 +1,22 @@
 ---
 kind: pipeline
-# type: docker
 name: default
 
 clone:
   depth: 10
 
 steps:
-- name: test
-  image: golang
-  environment:
-    CGO_ENABLED: 0
-    GO111MODULE: on
-    GOPROXY: "https://goproxy.io"
+- name: code-test
+  image: golang:1.15
   commands:
+  - go build
   - go test
 
-- name: build
+- name: docker
   image: plugins/docker
   settings:
     registry: registry.shitangdama.cn
-    repo: registry.shitangdama.cn/test/laki
+    repo: registry.shitangdama.cn/test/demo
     auto_tag: true
     dockerfile: Dockerfile
     username: shitangdama
@@ -29,12 +25,9 @@ steps:
     when:
       branch:
         - master
+        - dev
       event:
         - push
-
-# depends_on:
-# - test
-
 trigger:
   branch:
   - master
