@@ -8,6 +8,10 @@ clone:
 steps:
 - name: code-test
   image: golang
+  environment:
+    CGO_ENABLED: 0
+    GO111MODULE: on
+    GOPROXY: "https://goproxy.io"
   commands:
   - go build
   - go test
