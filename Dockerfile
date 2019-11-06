@@ -1,9 +1,9 @@
 FROM golang:1.12 AS builder
+ENV GOPROXY https://goproxy.io
+ENV GO111MODULE on
+
 
 WORKDIR /build
-RUN export GO111MODULE=on
-RUN export GOPROXY=https://goproxy.io
-
 COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o demo .
