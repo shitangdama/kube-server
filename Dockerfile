@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.12 AS builder
 
 WORKDIR /build
 # RUN export GO111MODULE=on
@@ -8,7 +8,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o demo .
 
-FROM alpine:latest
+FROM alpine:3.10
 
 RUN apk --no-cache add ca-certificates
 WORKDIR /app
