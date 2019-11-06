@@ -6,3 +6,9 @@ $env:GOPROXY = "https://goproxy.io"
 使用gin来写数据中心
 
 https://blog.csdn.net/weixin_42506905/article/details/93135684
+
+
+测试
+lint
+打包
+部署
