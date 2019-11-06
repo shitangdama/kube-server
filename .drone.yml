@@ -6,15 +6,15 @@ clone:
   depth: 10
 
 steps:
-- name: code-test
-  image: golang
-  environment:
-    GO111MODULE: on
-    GOPROXY: "https://goproxy.io"
-  commands:
-  - go test
+# - name: code-test
+#   image: golang
+#   environment:
+#     GO111MODULE: on
+#     GOPROXY: "https://goproxy.io"
+#   commands:
+#   - go test
 
-- name: docker
+- name: test-docker
   image: plugins/docker
   settings:
     registry: registry.shitangdama.cn
