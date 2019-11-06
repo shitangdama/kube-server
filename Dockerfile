@@ -2,7 +2,7 @@ FROM golang:latest AS builder
 
 WORKDIR /build
 # RUN export GO111MODULE=on
-RUN export GOPROXY=https://goproxy.io
+RUN export GOPROXY=https://goproxy.cn
 
 COPY . .
 

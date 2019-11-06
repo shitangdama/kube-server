@@ -15,6 +15,7 @@ steps:
 #   - go test
 
 - name: test-docker
+  pull: if-not-exists
   image: plugins/docker
   settings:
     registry: registry.shitangdama.cn
