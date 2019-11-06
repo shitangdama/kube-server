@@ -3,6 +3,9 @@ kind: pipeline
 type: docker
 name: default
 
+clone:
+  depth: 10
+
 steps:
 - name: test
   image: golang
