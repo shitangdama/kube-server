@@ -21,7 +21,7 @@ steps:
   registry: registry.shitangdama.cn
   repo: registry.shitangdama.cn/test/laki
   auto_tag: true
-  dockerfile: Dockerfile
+  dockerfile: dockerfile
   username: shitangdama
   password:
     from_secret: docker_password
