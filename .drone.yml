@@ -6,17 +6,12 @@ name: test
 steps:
 - name: test
   image: golang
+  environment:
+    CGO_ENABLED: 0
+    GO111MODULE: on
   commands:
-  - export GO111MODULE=on
-  - export GOPROXY=https://goproxy.io
   - go test
 
----
-kind: pipeline
-type: docker
-name: build
-
-steps:
 - name: build
   image: plugins/docker
   registry: registry.shitangdama.cn

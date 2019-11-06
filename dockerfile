@@ -1,6 +1,8 @@
 FROM golang:latest AS builder
 
 RUN mkdir app
+RUN export GO111MODULE=on
+RUN export GOPROXY=https://goproxy.io
 
 WORKDIR /app/
 
