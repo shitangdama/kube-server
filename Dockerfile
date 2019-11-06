@@ -1,7 +1,7 @@
 FROM golang:1.12 AS builder
 
 WORKDIR /build
-# RUN export GO111MODULE=on
+RUN export GO111MODULE=on
 RUN export GOPROXY=https://goproxy.io
 
 COPY . .
