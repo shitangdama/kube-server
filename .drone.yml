@@ -19,7 +19,7 @@ steps:
   image: plugins/docker
   settings:
     registry: registry.shitangdama.cn
-    repo: registry.shitangdama.cn/laki
+    repo: registry.shitangdama.cn/dama/laki
     auto_tag: true
     dockerfile: Dockerfile
     username: shitangdama
