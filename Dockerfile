@@ -1,4 +1,4 @@
-FROM  registry.shitangdama.cn/golang:1.12 AS builder
+FROM  golang:1.12 AS builder
 ENV GOPROXY https://goproxy.io
 ENV GO111MODULE on
 
@@ -8,7 +8,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o demo .
 
-FROM  registry.shitangdama.cn/alpine:3.10
+FROM  alpine:3.10
 
 RUN apk --no-cache add ca-certificates
 WORKDIR /app
@@ -16,4 +16,4 @@ WORKDIR /app
 EXPOSE 3000
 COPY --from=builder /build/demo /app/
 
-CMD ["./demo"]  
+CMD ["./demo"]
