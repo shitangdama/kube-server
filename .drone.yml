@@ -45,7 +45,7 @@ steps:
       script:
       - cd /home/ubuntu/dama/laki
       - docker-compose down
-      - docker-compose up
+      - docker-compose up -d
 
 trigger:
   branch:
