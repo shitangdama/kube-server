@@ -40,7 +40,7 @@ steps:
         - 118.24.142.70
       username: ubuntu
       password:
-        from_secret: ssh_passowrd
+        from_secret: ssh_password
       port: 22
       script:
       - cd /home/ubuntu/dama/laki
