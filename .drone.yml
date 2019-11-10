@@ -68,7 +68,6 @@ steps:
     - docker push dama/laki:$${DRONE_TAG}
   when:
     event: tag
-  privileged: true
 
 - name: ssh commands
   image: appleboy/drone-ssh
