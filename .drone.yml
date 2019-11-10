@@ -43,8 +43,9 @@ steps:
         from_secret: ssh_passowrd
       port: 22
       script:
-      - echo hello
-      - echo world
+      - cd /home/ubuntu/dama/laki
+      - docker-compose down
+      - docker-compose up
 
 trigger:
   branch:
