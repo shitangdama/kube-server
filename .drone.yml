@@ -7,31 +7,49 @@ name: default
 #   depth: 10
 
 steps:
-# - name: code-test
-#   image: golang
-#   environment:
-#     GO111MODULE: on
-#     GOPROXY: "https://goproxy.io"
-#   commands:
-#   - go test
+- name: code-test
+  image: golang
+  environment:
+    GO111MODULE: on
+    GOPROXY: "https://goproxy.io"
+  commands:
+  - go test
+  when:
+    branch:
+      include:
+        - feature/*
+        - master
+        - dev
+    event:
+      include:
+        - push
+        - pull_request
 
-# - name: test-docker
-#   pull: if-not-exists
-#   image: plugins/docker
-#   settings:
-#     registry: registry.shitangdama.cn
-#     repo: registry.shitangdama.cn/dama/laki
-#     auto_tag: true
-#     dockerfile: Dockerfile
-#     username: shitangdama
-#     password:
-#       from_secret: docker_password
-#     when:
-#       branch:
-#         - master
-#         - dev
-#       event:
-#         - push
+- name: build-docker
+  image: plugins/docker
+  settings:
+    registry: registry.shitangdama.cn
+    repo: registry.shitangdama.cn/dama/laki
+    dockerfile: Dockerfile
+    username: shitangdama
+    password:
+      from_secret: docker_password
+    # tag:
+    #   - ${DRONE_BRANCH##feature/}
+  when:
+    branch:
+      - master
+
+  - name: semantic-release
+    image: gtramontina/semantic-release:15.13.3
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+    entrypoint:
+      - semantic-release
+    when:
+      branch: master
+      event: push
 
   - name: ssh commands
     image: appleboy/drone-ssh
@@ -47,8 +65,8 @@ steps:
       - docker-compose down
       - docker-compose up -d
 
-trigger:
-  branch:
-  - master
-  event:
-  - push
+# trigger:
+#   branch:
+#   - master
+#   event:
+#   - push
