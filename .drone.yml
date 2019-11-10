@@ -34,22 +34,41 @@ steps:
     username: shitangdama
     password:
       from_secret: docker_password
-    # tag:
-    #   - ${DRONE_BRANCH##feature/}
+    tag:
+      - staging
+      - sha_${DRONE_COMMIT_SHA}
   when:
     branch:
       - master
 
-- name: semantic-release
-  image: gtramontina/semantic-release:15.13.3
+# - name: semantic-release
+#   image: gtramontina/semantic-release:15.13.3
+#   environment:
+#     GITHUB_TOKEN:
+#       from_secret: github_token
+#   entrypoint:
+#     - semantic-release
+#   when:
+#     branch: master
+#     event: push
+
+- name: push-docker-production
+  image: plugins/docker
+  registry: registry.shitangdama.cn
+  repo: registry.shitangdama.cn/dama/laki
   environment:
-    GITHUB_TOKEN:
-      from_secret: github_token
-  entrypoint:
-    - semantic-release
+    DOCKER_PASSWORD:
+      from_secret: docker_password
+  commands:
+    - docker -v
+    - nohup dockerd &
+    - docker login -u shitangmda -p $${docker_password}
+    - docker pull dama/laki:sha_$${DRONE_COMMIT_SHA}
+    - docker tag dama/laki:sha_$${DRONE_COMMIT_SHA} dama/laki:$${DRONE_TAG}
+    - docker push dama/laki:$${DRONE_TAG}
   when:
-    branch: master
-    event: push
+    event: tag
+  privileged: true
 
 - name: ssh commands
   image: appleboy/drone-ssh
