@@ -63,8 +63,8 @@ steps:
     - docker -v
     - nohup dockerd &
     - docker login -u shitangmda -p $${docker_password}
-    - docker pull dama/laki:sha_$${DRONE_COMMIT_SHA}
-    - docker tag dama/laki:sha_$${DRONE_COMMIT_SHA} dama/laki:$${DRONE_TAG}
+    # - docker pull dama/laki:sha_$${DRONE_COMMIT_SHA}
+    # - docker tag dama/laki:sha_$${DRONE_COMMIT_SHA} dama/laki:$${DRONE_TAG}
     - docker push dama/laki:$${DRONE_TAG}
   when:
     event: tag
@@ -80,9 +80,7 @@ steps:
     port: 22
     script:
     - cd /home/ubuntu/dama/laki
-    - docker rmi registry.shitangdama.cn/dama/laki
-    - docker-compose down
-    - docker-compose up -d
+    - docker-compose up -d --pull --force-recreate
 
 # trigger:
 #   branch:
