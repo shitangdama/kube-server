@@ -80,7 +80,9 @@ steps:
     port: 22
     script:
     - cd /home/ubuntu/dama/laki
-    - docker-compose up -d --force-recreate
+    - docker rmi registry.shitangdama.cn/dama/laki
+    - docker-compose down
+    - docker-compose up -d
 
 # trigger:
 #   branch:
