@@ -55,7 +55,7 @@ steps:
 - name: push-docker-production
   image: plugins/docker
   registry: registry.shitangdama.cn
-  repo: registry.shitangdama.cn/dama/laki
+  repo: dama/laki
   environment:
     DOCKER_PASSWORD:
       from_secret: docker_password
@@ -80,6 +80,7 @@ steps:
     port: 22
     script:
     - cd /home/ubuntu/dama/laki
+    - docker rmi dama/laki
     - docker-compose down
     - docker-compose up -d
 
