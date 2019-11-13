@@ -1,0 +1,15 @@
+version: "3"
+services:
+  laki: # Registry Web UI
+    restart: always
+    image: registry.shitangdama.cn/dama/laki:latest
+    container_name: laki
+    ports:
+      - 127.0.0.1:3000:3000
+    networks:
+      - custom_net
+
+networks:
+  custom_net:
+    external:
+      name: app_net
