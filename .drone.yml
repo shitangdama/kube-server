@@ -36,7 +36,7 @@ steps:
       from_secret: docker_password
     tag:
       - latest
-      - sha_${DRONE_COMMIT_SHA}
+      # - sha_${DRONE_COMMIT_SHA}
   when:
     branch:
       - master
