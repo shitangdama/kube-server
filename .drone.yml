@@ -7,67 +7,67 @@ name: default
 #   depth: 10
 
 steps:
-- name: code-test
-  image: golang
-  environment:
-    GO111MODULE: on
-    GOPROXY: "https://goproxy.io"
-  commands:
-  - go test
-  when:
-    branch:
-      include:
-        - feature/*
-        - master
-        - dev
-    event:
-      include:
-        - push
-        - pull_request
-
-- name: build-docker
-  image: plugins/docker
-  settings:
-    registry: registry.shitangdama.cn
-    repo: registry.shitangdama.cn/dama/laki
-    dockerfile: Dockerfile
-    username: shitangdama
-    password:
-      from_secret: docker_password
-    tag:
-      - latest
-      # - sha_${DRONE_COMMIT_SHA}
-  when:
-    branch:
-      - master
-
-# - name: semantic-release
-#   image: gtramontina/semantic-release:15.13.3
+# - name: code-test
+#   image: golang
 #   environment:
-#     GITHUB_TOKEN:
-#       from_secret: github_token
-#   entrypoint:
-#     - semantic-release
+#     GO111MODULE: on
+#     GOPROXY: "https://goproxy.io"
+#   commands:
+#   - go test
 #   when:
-#     branch: master
-#     event: push
+#     branch:
+#       include:
+#         - feature/*
+#         - master
+#         - dev
+#     event:
+#       include:
+#         - push
+#         - pull_request
 
-- name: push-docker-production
-  image: plugins/docker
-  registry: registry.shitangdama.cn
-  repo: dama/laki
-  environment:
-    DOCKER_PASSWORD:
-      from_secret: docker_password
-  commands:
-    - docker -v
-    - nohup dockerd &
-    - docker login -u shitangmda -p $${docker_password}
-    # - docker pull dama/laki:sha_$${DRONE_COMMIT_SHA}
-    # - docker tag dama/laki:sha_$${DRONE_COMMIT_SHA} dama/laki:$${DRONE_TAG}
-    - docker push dama/laki:$${DRONE_TAG}
-  when:
-    event: tag
+# - name: build-docker
+#   image: plugins/docker
+#   settings:
+#     registry: registry.shitangdama.cn
+#     repo: registry.shitangdama.cn/dama/laki
+#     dockerfile: Dockerfile
+#     username: shitangdama
+#     password:
+#       from_secret: docker_password
+#     tag:
+#       - latest
+#       # - sha_${DRONE_COMMIT_SHA}
+#   when:
+#     branch:
+#       - master
+
+# # - name: semantic-release
+# #   image: gtramontina/semantic-release:15.13.3
+# #   environment:
+# #     GITHUB_TOKEN:
+# #       from_secret: github_token
+# #   entrypoint:
+# #     - semantic-release
+# #   when:
+# #     branch: master
+# #     event: push
+
+# - name: push-docker-production
+#   image: plugins/docker
+#   registry: registry.shitangdama.cn
+#   repo: dama/laki
+#   environment:
+#     DOCKER_PASSWORD:
+#       from_secret: docker_password
+#   commands:
+#     - docker -v
+#     - nohup dockerd &
+#     - docker login -u shitangdama -p $${docker_password}
+#     # - docker pull dama/laki:sha_$${DRONE_COMMIT_SHA}
+#     # - docker tag dama/laki:sha_$${DRONE_COMMIT_SHA} dama/laki:$${DRONE_TAG}
+#     - docker push dama/laki:$${DRONE_TAG}
+#   when:
+#     event: tag
 
 - name: ssh commands
   image: appleboy/drone-ssh
@@ -81,8 +81,6 @@ steps:
     script:
     - cd /home/ubuntu/dama/laki
     - docker-compose down
-    - docker rmi registry.shitangdama.cn/dama/laki
-    - docker login -u shitangmda -p $${docker_password}
     - docker-compose up -d
 
 # trigger:
