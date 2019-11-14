@@ -82,6 +82,7 @@ steps:
     - cd /home/ubuntu/dama/laki
     - docker-compose down
     - docker rmi registry.shitangdama.cn/dama/laki
+    - docker login -u shitangmda -p $${docker_password}
     - docker-compose up -d
 
 # trigger:
