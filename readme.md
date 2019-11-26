@@ -13,6 +13,9 @@ lint
 打包
 部署
 
-acme.sh --issue  -d laki_api.shitangdama.cn   --nginx
+acme.sh --issue -d laki-api.shitangdama.cn --nginx
 
-acme.sh --installcert -d laki_api.shitangdama.cn --key-file /etc/nginx/ssl/laki_api.shitangdama.cn.key --fullchain-file /etc/nginx/ssl/laki_api.cer --reloadcmd  "service nginx force-reload"
+acme.sh --installcert -d laki-api.shitangdama.cn --key-file /etc/nginx/ssl/laki-api.shitangdama.cn.key --fullchain-file /etc/nginx/ssl/laki-api.cer --reloadcmd  "service nginx force-reload"
+
+
+chan底层实现 协程调度算法
