@@ -6,11 +6,5 @@ services:
     container_name: laki
     ports:
       - 127.0.0.1:3000:3000
-
-#     networks:
-#       - custom_net
-
-# networks:
-#   custom_net:
-#     external:
-#       name: app_net
+    volumes:
+      - ./config/kubeconfig.yaml:/app/config/kubeconfig.yaml

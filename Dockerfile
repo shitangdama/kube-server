@@ -15,5 +15,5 @@ WORKDIR /app
 
 EXPOSE 3000
 COPY --from=builder /build/demo /app/
-COPY --from=builder /build/config/kubeconfig.yaml /app/config/kubeconfig.yaml
+# COPY --from=builder /build/config/kubeconfig.yaml /app/config/kubeconfig.yaml
 CMD ["./demo"]
