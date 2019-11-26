@@ -13,7 +13,7 @@ FROM  alpine:3.10
 
 WORKDIR /app
 
-EXPOSE 3000
+EXPOSE 8080
 COPY --from=builder /build/demo /app/
 # COPY --from=builder /build/config/kubeconfig.yaml /app/config/kubeconfig.yaml
 CMD ["./demo"]
