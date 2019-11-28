@@ -8,6 +8,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
+var clientset *kubernetes.Clientset
+
 func InitClient() (clientset *kubernetes.Clientset, err error) {
 	var (
 		restConf *rest.Config

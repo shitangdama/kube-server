@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"laki/controllers"
 	"net/http"
+	"laki/controllers"
 )
 
 func main() {
